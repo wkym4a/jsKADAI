@@ -1,3 +1,31 @@
+//《コメント欄で提出する課題》
+//課題①：$(‘#btn-evaluation’).click(function() { ~ });の記述の意味
+//himl側(今回なら「sample.html」)の読み込みが終わったタイミングで、
+//この関数内の{ ~ }の記述が読み込まれる
+
+//課題②：$(‘#btn-evaluation’).click(function() { ~ });の記述の意味
+//id名が「btn-evaluation」である要素(今回なら「ランク」ボタン)がクリックされたタイミングで、
+//この関数内の{ ~ }の処理が実行される
+　
+//課題③：$(‘#national_language, #english, #mathematics, #science, #society’).change(function() { ~ });の記述の意味
+//id名が「national_languag」「english」「mathematics」「science」「society」である要素
+//(＝各教科の点数を入力する欄)の値が変更されたタイミング（※）で、関数内の処理が実行される
+//※：提出した投稿では、「値が変更されたタイミング」ではなく「カーソルが入力欄から離れたタイミング」に変更しました
+//　　（∵、値が変更されていなくても【その値が正しいかどうか確認→正しくなければメッセージ表示】の処理を走らせたかったため）
+
+//課題④：$(‘#national_language’).val()の記述の意味
+//id名が「national_language」である要素（「国語」の点数入力欄）に記入されている情報
+    
+//課題⑤：Number()の記述の意味
+//括弧で括られている内容を、数値型に変換する
+
+//課題⑥：$(“#sum_indicate”).text(sum);の記述の意味
+//id名が「sum_indicate」である要素（今回の場合、「合計点」の表示欄）を
+//変数「sum」の値に変更する
+    
+//課題⑦：.appendの記述の意味
+//id名が「declaration」である要素（の一番後ろの位置）に、括弧内にhtml文で記述されている要素
+//（今回の場合、『水色（この色などは、クラス名やidに基づきcss内で指定されている）の吹き出し』）を挿入する
 
 $(document).ready(function(){
 
@@ -6,8 +34,11 @@ $(document).ready(function(){
   function chk_point(point_changed){
     
     let point = point_changed.val();
-    
-    if(0<= Number(point)
+   
+    //そのまま文字列にした場合と整数化してから文字列化した場合を比較……これでできた
+    //及び「0以上」「100以下」を確認
+    if(String(point)===String(Math.round(point))
+    && 0<= Number(point)
     && Number(point) <=100){
     /*
     if(Number.isInteger(point)===true//どっちもうまくいかない
@@ -40,8 +71,6 @@ $(document).ready(function(){
                           Number($('#science').val()),
                           Number($('#society').val())
                           ];
-                          
-        console.log(subject_points);//テスト
                           
         return subject_points;
     }
@@ -156,10 +185,7 @@ $(document).ready(function(){
       
       score_indicate();
     }else{
-      //正しくなければ
-      console.log("toottesu");
-      console.log($(this));
-      console.log($change_point);
+      
       //エラーメッセージを表示して
       $change_point.next(".ErrMsg").removeClass("hide");
       //そこに戻る
